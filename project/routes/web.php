@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+// Etudiant routes
+Route::get('/etudiant', [EtudiantController::class, 'create'])->name('create');
+Route::post('/etudiant', [EtudiantController::class, 'store'])->name('create');
+
+// Photo routes
+Route::get('/photos', [PhotoController::class, 'create'])->name('create');
+Route::post('/photos', [PhotoController::class, 'store'])->name('create');
+
