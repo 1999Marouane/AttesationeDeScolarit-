@@ -29,10 +29,7 @@ class PhotoController extends Controller
     {
         $photo = new photo();
         // Validate the input
-        $request->validate([
-            'etudiant_id' => 'required|exists:etudiants,id',
-            'path' => 'required',
-        ]);
+
         if($request->hasFile('image')){
             $file = $request->file('image');
             $extension    = $file->getClientOriginalExtension();
@@ -48,7 +45,7 @@ class PhotoController extends Controller
         }
 
         // Create a new photo
-        photo::create($request->all());
+
 
         return redirect()->route('welcome.create')->with('success', 'Photo created successfully');
     }

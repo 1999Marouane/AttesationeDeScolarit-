@@ -10,8 +10,9 @@
 <body>
 <h1>progect</h1>
 
-<form  method="post" action="{{route('create')}}">
-    <div>
+<form  method="post" action="{{route('test')}}" enctype="multipart/form-data">
+    @csrf
+
         <label>apoge</label>
         <input type="text" name="apoge" ><br>
         <label>cin</label>
@@ -23,11 +24,11 @@
         <label>nom</label>
         <input type="text" name="nom" ><br>
         <label>date naiss</label>
-        <input type="text" name="date naiss" ><br>
-        @csrf
+        <input type="date" name="dateNaiss" ><br>
+
         <input type="file"  class="swal2-input" name="image"  placeholder="image"><br>
         <input type="submit" class="btn btn-outline-secondary" value="click">
-    </div>
+
 
 </form>
 

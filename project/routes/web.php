@@ -19,8 +19,8 @@ use App\Http\Controllers\PhotoController;
 
 
 // Etudiant routes
-Route::get('/etudiant', [EtudiantController::class, 'create'])->name('create');
-Route::post('/etudiant', [EtudiantController::class, 'store'])->name('create');
+Route::get('/test', [EtudiantController::class, 'create'])->name('test');
+Route::post('/test', [EtudiantController::class, 'store'])->name('create');
 
 // Photo routes
 Route::get('/photos', [PhotoController::class, 'create'])->name('create');

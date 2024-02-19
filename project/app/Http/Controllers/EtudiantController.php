@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
+use App\Models\photo;
 use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
@@ -25,20 +26,42 @@ class EtudiantController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the input
-        $request->validate([
-            'apoge' => 'required|unique:etudiants',
-            'cin' => 'required',
-            'cne' => 'required',
-            'prenom' => 'required',
-            'nom' => 'required',
-            'dateNaiss' => 'required',
-        ]);
+        $photo = new photo();
+        $etudiant= new Etudiant();
 
-        // Create a new etudiant
-        Etudiant::create($request->all());
 
-        return redirect()->route('etudiant')->with('success', 'Etudiant created successfully');
+        $etudiant->apoge= $request->apoge;
+        $etudiant->cin = $request->cin;
+        $etudiant->cne= $request->cne;
+        $etudiant->prenom= $request->prenom;
+        $etudiant->nom= $request->nom;
+        $etudiant->dateNaiss= $request->dateNaiss;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $extension    = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension ;
+            $file->move('upload/empolyee/',$filename);
+
+
+            $photo->image = $filename;
+
+        }else{
+            return $request;
+            $photo->image = '';
+        }
+
+
+
+
+
+
+
+
+        $photo->save();
+        $etudiant->save();
+
+        return redirect()->view('welcome')->with('success', 'Etudiant created successfully');
     }
 
     /**
