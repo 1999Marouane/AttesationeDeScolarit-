@@ -8,7 +8,7 @@
     <title>project</title>
 </head>
 <body>
-<h1>progect</h1>
+
 
 <form  method="post" action="{{route('test')}}" enctype="multipart/form-data">
     @csrf
