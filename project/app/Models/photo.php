@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class photo extends Model
 {
-    protected $fillable=[
-        'etudiant_id',
-        'path'
-    ];
+    // In your Eloquent model
+    protected $fillable = ['etudiant_id', 'path', 'updated_at', 'created_at'];
+
     public function etudiant()
     {
         return $this->belongsTo(Etudiant::class);

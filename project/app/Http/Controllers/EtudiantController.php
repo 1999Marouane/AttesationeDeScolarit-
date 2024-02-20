@@ -29,13 +29,14 @@ class EtudiantController extends Controller
         $photo = new photo();
         $etudiant= new Etudiant();
 
-
         $etudiant->apoge= $request->apoge;
         $etudiant->cin = $request->cin;
         $etudiant->cne= $request->cne;
         $etudiant->prenom= $request->prenom;
         $etudiant->nom= $request->nom;
         $etudiant->dateNaiss= $request->dateNaiss;
+        $etudiant->save();
+
 
         if($request->hasFile('image')){
             $file = $request->file('image');
@@ -43,25 +44,19 @@ class EtudiantController extends Controller
             $filename = time().'.'.$extension ;
             $file->move('upload/empolyee/',$filename);
 
-
-            $photo->image = $filename;
-
+            $photo->path = $filename;
+            $photo->etudiant_id = $etudiant->id;
         }else{
             return $request;
             $photo->image = '';
+            $photo->etudiant_id = $etudiant->id;
         }
 
 
-
-
-
-
-
-
         $photo->save();
-        $etudiant->save();
 
-        return redirect()->view('welcome')->with('success', 'Etudiant created successfully');
+
+        return view('welcome')->with('success', 'Etudiant created successfully');
     }
 
     /**
