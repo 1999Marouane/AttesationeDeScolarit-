@@ -26,8 +26,6 @@
         <label>date naiss</label><br>
         <input type="date" name="dateNaiss" ><br>
 
-
-
     <div>
         <label for="inputTag">
             Select Image <br/>
