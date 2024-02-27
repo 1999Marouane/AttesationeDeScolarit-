@@ -19,7 +19,17 @@ use App\Http\Controllers\PhotoController;
 
 
 // Etudiant routes
-Route::get('/test', [EtudiantController::class, 'create'])->name('test');
-Route::post('/test', [EtudiantController::class, 'store'])->name('create');
+Route::get('/create', [EtudiantController::class, 'create'])->name('test');
+Route::post('/create', [EtudiantController::class, 'store'])->name('create');
 
 
+
+
+Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiants.index');
+Route::get('/etudiants/{id}', [EtudiantController::class, 'show'])->name('etudiants.show');
+Route::get('/etudiants/{id}/edit', [EtudiantController::class, 'edit'])->name('etudiants.edit');
+Route::put('/etudiants/{id}', [EtudiantController::class, 'update'])->name('etudiants.update');
+Route::delete('/etudiants/{id}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy');
+
+
+Route::get('/students/search', [EtudiantController::class, 'search'])->name('etudiants.search');

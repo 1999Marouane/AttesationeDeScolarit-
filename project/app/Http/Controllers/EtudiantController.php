@@ -13,7 +13,8 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        //
+        $etudiants = Etudiant::all();
+        return view('adminitrator.home',compact('etudiants'));
     }
 
     /**
@@ -43,8 +44,7 @@ class EtudiantController extends Controller
             $extension    = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension ;
             $file->move('upload/empolyee/',$filename);
-
-            $photo->path = $filename;
+            $photo->path = 'upload/empolyee/'.$filename;
             $photo->etudiant_id = $etudiant->id;
         }else{
             return $request;
@@ -56,38 +56,58 @@ class EtudiantController extends Controller
         $photo->save();
 
 
-        return view('welcome')->with('success', 'Etudiant created successfully');
+        return view('etudiant')->with('success', 'Etudiant created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $student = Etudiant::findOrFail($id);
+        return view('adminitrator.show', compact('student'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $student = Etudiant::findOrFail($id);
+        return view('adminitrator.update', compact('student'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $student = Etudiant::findOrFail($id);
+
+        // Validate and update the student data
+       /* $request->validate([
+            'apoge' => 'required',
+            'cin' => 'required',
+            'cne' => 'required',
+            'prenom' => 'required',
+            'nom' => 'required',
+            'dateNaiss' => 'required',
+        ]);*/
+
+        $student->update($request->all());
+
+        return redirect()->route('etudiants.index')->with('success', 'Student updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $student = Etudiant::findOrFail($id);
+        $student->delete();
+
+        return redirect()->route('etudiants.index')->with('success', 'Student deleted successfully');
     }
+
+
+    public function search(Request $request)
+    {
+        $cin = $request->input('cin');
+        $students = Etudiant::where('cin', 'like', '%' . $cin . '%')->get();
+
+        return view('adminitrator.search', compact('students', 'cin'));
+    }
+
 }
