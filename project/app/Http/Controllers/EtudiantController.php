@@ -17,6 +17,17 @@ class EtudiantController extends Controller
         return view('adminitrator.home',compact('etudiants'));
     }
 
+
+    public function supprimer()
+    {
+        $etudiants = Etudiant::all();
+        return view('adminitrator.supprimer',compact('etudiants'));
+    }
+    public function editer()
+    {
+        $etudiants = Etudiant::all();
+        return view('adminitrator.edite',compact('etudiants'));
+    }
     /**
      * Show the form for creating a new resource.
      */
