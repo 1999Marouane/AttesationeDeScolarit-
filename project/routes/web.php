@@ -32,4 +32,10 @@ Route::put('/etudiants/{id}', [EtudiantController::class, 'update'])->name('etud
 Route::delete('/etudiants/{id}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy');
 
 
+
+
 Route::get('/students/search', [EtudiantController::class, 'search'])->name('etudiants.search');
+
+
+
+Route::get('/supprimer', [EtudiantController::class, 'supprimer'])->name('supprimer.index');

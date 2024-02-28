@@ -28,7 +28,7 @@
                 <a class="nav-link" href="#">edit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">delete</a>
+                <a class="nav-link" href="{{route('supprimer.index')}}">delete</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-md-0" action="{{ route('etudiants.search') }}" method="GET">
