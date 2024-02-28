@@ -109,5 +109,4 @@ class EtudiantController extends Controller
 
         return view('adminitrator.search', compact('students', 'cin'));
     }
-
 }
