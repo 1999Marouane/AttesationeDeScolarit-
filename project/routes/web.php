@@ -39,3 +39,4 @@ Route::get('/students/search', [EtudiantController::class, 'search'])->name('etu
 
 
 Route::get('/supprimer', [EtudiantController::class, 'supprimer'])->name('supprimer.index');
+Route::get('/editer', [EtudiantController::class, 'editer'])->name('editer.index');
