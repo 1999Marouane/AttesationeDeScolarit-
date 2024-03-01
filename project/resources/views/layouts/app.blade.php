@@ -1,47 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title> Laravel App</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Laravel App</title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">etudiants </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExample02">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{route('etudiants.index')}}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('test')}}">create</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('editer.index')}}">edit</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('supprimer.index')}}">delete</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0" action="{{ route('etudiants.search') }}" method="GET">
-            <input class="form-control m-1" type="text" name="cin" placeholder="Search by CIN">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-
-
-<div class="container">
-    @yield('content')
-</div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+             @include('layouts.navigation')
+               <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white dark:bg-gray-800 shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
+            <!-- Page Content -->
+            <main>
+               @yield('content')
+            </main>
+        </div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

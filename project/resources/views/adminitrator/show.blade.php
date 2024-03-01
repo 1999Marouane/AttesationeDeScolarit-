@@ -1,12 +1,10 @@
-
-
 @extends('layouts.app')
 
 @section('content')
     <div class="row mt-5">
-        <div class="col-md-12">
-            <h1>Student Information</h1>
-            <table class="table">
+        <div class="col-md-11 mx-auto text-center">
+            <h1 class="mb-4">Student Information</h1>
+            <table class="table table-striped">
                 <tbody>
                 <tr>
                     <th>Apoge</th>

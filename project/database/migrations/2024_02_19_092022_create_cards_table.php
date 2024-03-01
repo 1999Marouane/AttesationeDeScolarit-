@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->boolean('verify');
+            $table->foreignId('etudiant_id')->constrained('etudiants');
             $table->timestamps();
         });
     }

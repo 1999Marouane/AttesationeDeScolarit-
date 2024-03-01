@@ -3,11 +3,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <h1>Student Information</h1>
-            <table class="table">
-                <thead>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-10">
+            <h1 class="text-center m-3" style="color: #007BFF; font-size: 2em; font-weight: bold;">Student Information</h1>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
                 <tr>
                     <th>Apoge</th>
                     <th>CIN</th>
@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($etudiants as $student)
+                @forelse ($etudiants as $student)
                     <tr>
                         <td>{{ $student->apoge }}</td>
                         <td>{{ $student->cin }}</td>
@@ -28,12 +28,14 @@
                         <td>{{ $student->nom }}</td>
                         <td>{{ $student->dateNaiss }}</td>
                         <td>
-
                             <a href="{{ route('etudiants.edit', $student->id) }}" class="btn btn-warning">Edit</a>
-
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">No student records found.</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

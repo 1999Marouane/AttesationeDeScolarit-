@@ -16,8 +16,12 @@ class Etudiant extends Model
         'nom',
         'dateNaiss',
     ];
-    public function photos()
+    public function photo()
     {
-        return $this->hasMany(Photo::class);
+        return $this->hasMany(photo::class);
+    }
+    public function card()
+    {
+        return $this->hasOne(Card::class);
     }
 }

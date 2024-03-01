@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Etudiant;
 use App\Models\photo;
 use Illuminate\Http\Request;
@@ -41,13 +42,21 @@ class EtudiantController extends Controller
         $photo = new photo();
         $etudiant= new Etudiant();
 
+
+
+
+
         $etudiant->apoge= $request->apoge;
         $etudiant->cin = $request->cin;
         $etudiant->cne= $request->cne;
         $etudiant->prenom= $request->prenom;
         $etudiant->nom= $request->nom;
         $etudiant->dateNaiss= $request->dateNaiss;
+
+
+
         $etudiant->save();
+
 
 
         if($request->hasFile('image')){
@@ -62,12 +71,22 @@ class EtudiantController extends Controller
             $photo->image = '';
             $photo->etudiant_id = $etudiant->id;
         }
+            $photo->save();
 
 
-        $photo->save();
+        // card save card
+        $card = new Card(['verify' => false]);
+        $etudiant->card()->save($card);
+        //end card
 
 
-        return view('etudiant')->with('success', 'Etudiant created successfully');
+        if ($request->fails()) {
+            return response()->json(['error' => $request->errors()], 400);
+        }
+            return view('etudiant')->with('success', 'Etudiant created successfully');
+
+
+
     }
 
     /**
@@ -90,14 +109,14 @@ class EtudiantController extends Controller
         $student = Etudiant::findOrFail($id);
 
         // Validate and update the student data
-       /* $request->validate([
-            'apoge' => 'required',
-            'cin' => 'required',
-            'cne' => 'required',
+        $request->validate([
+            'apoge' => 'required|regex:/^\d+$/',
+            'cin' => 'required|regex:/^[A-Z]{2}\d+$/',
+            'cne' => 'required|regex:/^[A-Z]\d+$/',
             'prenom' => 'required',
             'nom' => 'required',
-            'dateNaiss' => 'required',
-        ]);*/
+            'dateNaiss' => 'required|date|before:2006-01-01',
+        ]);
 
         $student->update($request->all());
 
@@ -115,9 +134,20 @@ class EtudiantController extends Controller
 
     public function search(Request $request)
     {
-        $cin = $request->input('cin');
-        $students = Etudiant::where('cin', 'like', '%' . $cin . '%')->get();
+        $search = $request->input('cin');
+        $students = Etudiant::where('apoge', 'like', '%' . $search . '%' )
+            ->orWhere('cin', 'like', '%' . $search . '%')
+            ->orWhere('cne', 'like', '%' . $search . '%')->get();
 
-        return view('adminitrator.search', compact('students', 'cin'));
+        return view('adminitrator.search', compact('students', 'search'));
+    }
+
+
+
+    public function toggleCardStatus(Card $card)
+    {
+        $card->update(['verify' => !$card->verify]);
+
+        return redirect()->back();
     }
 }

@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <h1>Search Results for CIN: {{ $cin }}</h1>
+    <div class="row mt-5c">
+        <div class="col-md-11 text-center">
+            <h1>Search Results for CIN: {{ $search }}</h1>
             @if($students->isEmpty())
                 <p>No matching records found.</p>
             @else
@@ -36,7 +36,7 @@
                                 <form action="{{ route('etudiants.destroy', $student->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger text-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
                                 </form>
                             </td>
                         </tr>
