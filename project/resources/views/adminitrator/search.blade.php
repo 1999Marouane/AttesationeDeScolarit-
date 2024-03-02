@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row mt-5c">
+    <div class="row mt-5c  justify-content-center">
         <div class="col-md-11 text-center">
-            <h1>Search Results for CIN: {{ $search }}</h1>
+            <h1 class="m-4  text-2xl">Search Results : {{ $search }}</h1>
             @if($students->isEmpty())
                 <p>No matching records found.</p>
             @else

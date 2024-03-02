@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mt-5 justify-content-center">
         <div class="col-md-11 text-center">
-                <h1 class="mb-4">Student Information</h1>
+                <h1 class="mb-4 text-2xl">Student Information</h1>
             <table class="table ">
                 <thead>
                 <tr>
