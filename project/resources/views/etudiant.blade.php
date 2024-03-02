@@ -44,16 +44,47 @@
             max-width: 450px;
             margin-bottom: 20px;
         }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
 
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .alert li {
+            margin-bottom: 5px;
+        }
     </style>
     <title>Project</title>
 </head>
 <body>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <img class="logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqRbnxNfYii_ti2s8mEAqIkvITLUjCeQCfPk9j9w2DAkHt4AwdFGs5ygUL7gpiCfonNHit1eVf71TKTMzGKOF-SxnjGx2usBjpFCw4n2X7K-ZLeOS1ShZEAHrBUbr72lzwcTACTtlDftbXQV35sbiffWkE7ixmXCrgxGLO-FdHp74chcF9J8Ps-WxNJQ/w640-h360/Master%20FLLA%20Kenitra%202022-2023.jpg"
      title="Master FLLA Kénitra 2023-2024" alt="Logo">
 
-<form method="post" action="{{ route('test') }}" enctype="multipart/form-data">
+<form method="post"  action="{{ route('test') }}" enctype="multipart/form-data">
     @csrf
 
     <label>Apoge:</label>
@@ -83,6 +114,10 @@
             <span id="imageName"></span>
         </label>
     </div>
+
+
+
+
 
     <input type="submit" class="btn btn-outline-secondary" value="Click">
 </form>

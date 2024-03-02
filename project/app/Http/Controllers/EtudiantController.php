@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Validator;
 use App\Models\Card;
 use App\Models\Etudiant;
 use App\Models\photo;
@@ -43,6 +45,20 @@ class EtudiantController extends Controller
         $etudiant= new Etudiant();
 
 
+        $validator = Validator::make($request->all(), [
+            'apoge' => 'required|regex:/^\d+$/',
+            'cin' => 'required|regex:/^[A-Z]{2}\d+$/',
+            'cne' => 'required|regex:/^[A-Z]\d+$/',
+            'prenom' => 'required',
+            'nom' => 'required',
+            'dateNaiss' => 'required|date|before:2006-01-01',
+        ]);
+
+        if ($validator->fails()) {
+            return view('etudiant')->withErrors($validator);
+        }
+
+
 
 
 
@@ -56,8 +72,6 @@ class EtudiantController extends Controller
 
 
         $etudiant->save();
-
-
 
         if($request->hasFile('image')){
             $file = $request->file('image');
@@ -80,10 +94,8 @@ class EtudiantController extends Controller
         //end card
 
 
-        if ($request->fails()) {
-            return response()->json(['error' => $request->errors()], 400);
-        }
-            return view('etudiant')->with('success', 'Etudiant created successfully');
+
+         return view('etudiant')->with('success', 'Etudiant created successfully');
 
 
 
